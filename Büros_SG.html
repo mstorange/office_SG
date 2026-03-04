@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_1af2541ae7a9cb46dd73dba9deddfa04 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    
+                    <style>
+                        .foliumtooltip {
+                            
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+    
+                    <style>
+                        .foliumpopup {
+                            margin: auto;
+                        }
+                       .foliumpopup table{
+                            margin: auto;
+                        }
+                        .foliumpopup tr{
+                            text-align: left;
+                        }
+                        .foliumpopup th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+</head>
+<body>
+    
+    
+<div style="
+    position: fixed; 
+    bottom: 10px; 
+    left: 10px; 
+    width: 150px; 
+    height: auto; 
+    padding: 10px;
+    background-color: white; 
+    border-radius: 0px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    font-family: Arial;
+    font-size: 9px;
+    z-index: 1000;
+">
+    <h1 style="margin-top: 0;">Infos</h1>
+    <p>Punkte anklickbar für Infos zu Miete, Mietbeginn, Nutzfläche, Anbieter und Link zum Inserat.</p>
+</div>
+    
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_Losinger_Marazzi.png/640px-Logo_Losinger_Marazzi.png" 
+ style="position:fixed; bottom:10px; right:10px; z-index:9999; width:80px; border-radius:10px;">
+    <h3 align="center" style="font-size:20px"><b>Büros in St. Gallen</b></h3>
+    
+            <div class="folium-map" id="map_1af2541ae7a9cb46dd73dba9deddfa04" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_1af2541ae7a9cb46dd73dba9deddfa04 = L.map(
+                "map_1af2541ae7a9cb46dd73dba9deddfa04",
+                {
+                    center: [47.41981442870758, 9.369580702842224],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b27813418eda578a945360a16ff5b11f = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b27813418eda578a945360a16ff5b11f.addTo(map_1af2541ae7a9cb46dd73dba9deddfa04);
+        
+    
+            var feature_group_8544d52458462a90c94ce5ce0e4ef93e = L.featureGroup(
+                {
+}
+            );
+        
+    
+        function geo_json_d080ebfd920d2772c434fdc37ad7c8e4_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"color": "orange", "fillColor": "orange", "fillOpacity": 1, "weight": 5};
+            }
+        }
+        function geo_json_d080ebfd920d2772c434fdc37ad7c8e4_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 2,
+};
+            
+            let style = geo_json_d080ebfd920d2772c434fdc37ad7c8e4_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.circle(latlng, opts)
+        }
+
+        function geo_json_d080ebfd920d2772c434fdc37ad7c8e4_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_d080ebfd920d2772c434fdc37ad7c8e4 = L.geoJson(null, {
+                onEachFeature: geo_json_d080ebfd920d2772c434fdc37ad7c8e4_onEachFeature,
+            
+                style: geo_json_d080ebfd920d2772c434fdc37ad7c8e4_styler,
+                pointToLayer: geo_json_d080ebfd920d2772c434fdc37ad7c8e4_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_d080ebfd920d2772c434fdc37ad7c8e4_add (data) {
+            geo_json_d080ebfd920d2772c434fdc37ad7c8e4
+                .addData(data);
+        }
+            geo_json_d080ebfd920d2772c434fdc37ad7c8e4_add({"bbox": [9.369580702842224, 47.41981442870758, 9.380616372879652, 47.424474246507785], "features": [{"bbox": [9.369580702842224, 47.41981442870758, 9.369580702842224, 47.41981442870758], "geometry": {"coordinates": [9.369580702842224, 47.41981442870758], "type": "Point"}, "id": "0", "properties": {"Anbieter": "Wincasa", "Gemeinde": "St. Gallen", "Link": "\u003ca href=https://www.homegate.ch/mieten/4002397967\u003eInserat\u003c/a\u003e", "Mietbeginn": "n.V.", "Miete (netto)": "1172.-", "Nummer": "11", "Nutzfl\u00e4che": "95 m2", "Strasse": "Unterstrasse", "addresse": "Unterstrasse 11, St. Gallen", "edid": 0, "egid": 1072306, "zip": "9000"}, "type": "Feature"}, {"bbox": [9.371913766898748, 47.42037103834478, 9.371913766898748, 47.42037103834478], "geometry": {"coordinates": [9.371913766898748, 47.42037103834478], "type": "Point"}, "id": "1", "properties": {"Anbieter": "Mobimo", "Gemeinde": "St. Gallen", "Link": "\u003ca href=https://www.mobimo.ch/de/immobilien/aktuelle-angebote/ipv_0_fac57adf-19da-11f0-a9d5-069ae14c7a06_0\u003eInserat\u003c/a\u003e", "Mietbeginn": "M\u00e4rz 2026 oder n.V.", "Miete (netto)": "905.-", "Nummer": "42", "Nutzfl\u00e4che": "53 m2", "Strasse": "Wassergasse", "addresse": "Wassergasse 42, St. Gallen", "edid": 0, "egid": 1072319, "zip": "9000"}, "type": "Feature"}, {"bbox": [9.371659545496971, 47.420214112659366, 9.371659545496971, 47.420214112659366], "geometry": {"coordinates": [9.371659545496971, 47.420214112659366], "type": "Point"}, "id": "2", "properties": {"Anbieter": "Mobimo", "Gemeinde": "St. Gallen", "Link": "\u003ca href=https://www.mobimo.ch/de/immobilien/aktuelle-angebote/ipv_0_fac57adf-19da-11f0-a9d5-069ae14c7a06_0\u003eInserat\u003c/a\u003e", "Mietbeginn": "M\u00e4rz 2026 oder n.V.", "Miete (netto)": "1554.-", "Nummer": "44", "Nutzfl\u00e4che": "91 m2", "Strasse": "Wassergasse", "addresse": "Wassergasse 44, St. Gallen", "edid": 2, "egid": 1072319, "zip": "9000"}, "type": "Feature"}, {"bbox": [9.371310596025735, 47.42290817824617, 9.371310596025735, 47.42290817824617], "geometry": {"coordinates": [9.371310596025735, 47.42290817824617], "type": "Point"}, "id": "3", "properties": {"Anbieter": "SOB", "Gemeinde": "St. Gallen", "Link": "exklusiv via Netzwerk", "Mietbeginn": "tbd", "Miete (netto)": "tbd", "Nummer": "1a", "Nutzfl\u00e4che": "50 m2", "Strasse": "Bahnhofplatz", "addresse": "Bahnhofplatz 1a, St. Gallen", "edid": 0, "egid": 1072347, "zip": "9000"}, "type": "Feature"}, {"bbox": [9.37452086085202, 47.424474246507785, 9.37452086085202, 47.424474246507785], "geometry": {"coordinates": [9.37452086085202, 47.424474246507785], "type": "Point"}, "id": "4", "properties": {"Anbieter": "Privera", "Gemeinde": "St. Gallen", "Link": "\u003ca href=https://www.homegate.ch/mieten/4002747878\u003eInserat\u003c/a\u003e", "Mietbeginn": "n.V.", "Miete (netto)": "2016.-", "Nummer": "46", "Nutzfl\u00e4che": "121 m2", "Strasse": "Neugasse", "addresse": "Neugasse 46, St. Gallen", "edid": 0, "egid": 1072578, "zip": "9000"}, "type": "Feature"}, {"bbox": [9.380616372879652, 47.42430945087087, 9.380616372879652, 47.42430945087087], "geometry": {"coordinates": [9.380616372879652, 47.42430945087087], "type": "Point"}, "id": "5", "properties": {"Anbieter": "Livit", "Gemeinde": "St. Gallen", "Link": "\u003ca href=https://www.homegate.ch/mieten/4002914169\u003eInserat\u003c/a\u003e", "Mietbeginn": "n.V.", "Miete (netto)": "1538.-", "Nummer": "14", "Nutzfl\u00e4che": "90 m2", "Strasse": "Linseb\u00fchlstrasse", "addresse": "Linseb\u00fchlstrasse 14, St. Gallen", "edid": 0, "egid": 1073521, "zip": "9000"}, "type": "Feature"}, {"bbox": [9.371830895048488, 47.42200856366339, 9.371830895048488, 47.42200856366339], "geometry": {"coordinates": [9.371830895048488, 47.42200856366339], "type": "Point"}, "id": "6", "properties": {"Anbieter": "Wincasa", "Gemeinde": "St. Gallen", "Link": "\u003ca href=https://www.homegate.ch/mieten/4002659877?utm_medium=email\u0026utm_source=crm\u0026utm_campaign=(CG_ema)(N_scrc)(C_ema-one)(L_ch-de)(G_tra)(U_cn)(D_web)(E_listing-address)\u003eInserat\u003c/a\u003e", "Mietbeginn": "n.V.", "Miete (netto)": "a. A.", "Nummer": "26", "Nutzfl\u00e4che": "151 m2", "Strasse": "Kornhausstrasse", "addresse": "Kornhausstrasse 26, St. Gallen", "edid": 0, "egid": 2363461, "zip": "9000"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+    geo_json_d080ebfd920d2772c434fdc37ad7c8e4.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature => {
+        if (feature === null) {
+            return '';
+        } else if (typeof(feature)=='object') {
+            return JSON.stringify(feature);
+        } else {
+            return feature;
+        }
+    }
+    let fields = ["addresse"];
+    let aliases = ["Adresse"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i]}</th>
+            
+            <td>${handleObject(layer.feature.properties[v])}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{
+  "sticky": true,
+  "className": "foliumtooltip",
+});
+                     
+    
+    geo_json_d080ebfd920d2772c434fdc37ad7c8e4.bindPopup(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature => {
+        if (feature === null) {
+            return '';
+        } else if (typeof(feature)=='object') {
+            return JSON.stringify(feature);
+        } else {
+            return feature;
+        }
+    }
+    let fields = ["addresse", "Nutzfl\u00e4che", "Miete (netto)", "Mietbeginn", "Anbieter", "Link"];
+    let aliases = ["Adresse", "Nutzfl\u00e4che", "Miete (netto)", "Mietbeginn", "Anbieter", "Link"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i].toLocaleString()}</th>
+            
+            <td>${handleObject(layer.feature.properties[v]).toLocaleString()}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{
+  "className": "foliumpopup",
+});
+                     
+    
+            geo_json_d080ebfd920d2772c434fdc37ad7c8e4.addTo(feature_group_8544d52458462a90c94ce5ce0e4ef93e);
+        
+    
+            feature_group_8544d52458462a90c94ce5ce0e4ef93e.addTo(map_1af2541ae7a9cb46dd73dba9deddfa04);
+        
+    
+            var tile_layer_88ae516045a96e1584a3dfbaa2429921 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_88ae516045a96e1584a3dfbaa2429921.addTo(map_1af2541ae7a9cb46dd73dba9deddfa04);
+        
+    
+            var layer_control_1426ca10228ae9a4a6fd9613c39694f1_layers = {
+                base_layers : {
+                    "Esri Satellite" : tile_layer_b27813418eda578a945360a16ff5b11f,
+                    "cartodbvoyager" : tile_layer_88ae516045a96e1584a3dfbaa2429921,
+                },
+                overlays :  {
+                    "Geb\u00e4ude mit Baujahr" : feature_group_8544d52458462a90c94ce5ce0e4ef93e,
+                },
+            };
+            let layer_control_1426ca10228ae9a4a6fd9613c39694f1 = L.control.layers(
+                layer_control_1426ca10228ae9a4a6fd9613c39694f1_layers.base_layers,
+                layer_control_1426ca10228ae9a4a6fd9613c39694f1_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_1af2541ae7a9cb46dd73dba9deddfa04);
+
+        
+</script>
+</html>
